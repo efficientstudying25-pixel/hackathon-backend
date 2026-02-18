@@ -1,0 +1,150 @@
+body{
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg,#010b21,#081e5a,#020111);
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    margin:0;
+}
+
+.container{
+    width:420px;
+    padding:25px;
+    border-radius:18px;
+
+    /* Glass effect */
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    border: 1px solid rgba(255,255,255,0.2);
+
+    /* Depth */
+    box-shadow:
+        0 8px 32px rgba(0,0,0,0.35);
+
+}
+
+.container:hover{
+    box-shadow:
+        0 12px 40px rgba(69, 71, 74, 0.4);
+}
+
+h1{
+    text-align:center;
+    margin-bottom:15px;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    border:none;
+    border-radius:8px;
+    background:#3b82f6;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+
+textarea,#highlightedText{
+    width:100%;
+    height:120px;
+    margin-top:10px;
+    padding:10px;
+    border-radius:8px;
+    border:none;
+    box-sizing:border-box;
+}
+
+textarea{
+    background:white;
+    color:black;
+}
+
+#highlightedText{
+    background:white;
+    color:black;
+    overflow-y:auto;
+    white-space:pre-wrap;
+}
+
+.flag{
+    background:#ef4444;
+    color:white;
+    padding:2px 4px;
+    border-radius:4px;
+}
+
+.hidden{
+    display:none;
+}
+
+#resultBox{
+    margin-top:15px;
+    padding:15px;
+    border-radius:12px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(12px);
+    border:1px solid rgba(255,255,255,0.3);
+}
+
+/* HEADER ALIGNMENT */
+.resultHeader{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+/* GAUGE */
+.gauge-wrapper{
+  position:absolute;
+  top:15px;
+  right:15px;
+}
+
+#riskCircle{
+    width:70px;
+    height:70px;
+    border-radius:50%;
+    background:conic-gradient(#22c55e 0deg, rgba(255,255,255,0.08) 0deg);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+#riskInner{
+    width:52px;
+    height:52px;
+    border-radius:50%;
+    background:#081e5a;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:12px;          /* smaller */
+    font-weight:bold;
+
+    gap:4px;                 /* space icon + number */
+}
+
+#riskInner{
+    letter-spacing:0.5px;
+}
+
+
+
+/* MIC PULSE */
+.listening{
+    animation:pulse 1s infinite;
+    background:#ef4444 !important;
+}
+
+@keyframes pulse{
+    0%{transform:scale(1)}
+    50%{transform:scale(1.05)}
+    100%{transform:scale(1)}
+}
