@@ -18,12 +18,12 @@ model = joblib.load("model/scam_model.pkl")
 vectorizer = joblib.load("model/vectorizer.pkl")
 
 
-# ---------- NEW: CLEAN TEXT (for ML consistency) ----------
+# ---------- CLEAN TEXT (for ML consistency) ----------
 def clean_text(text):
     return re.sub(r'[^a-zA-Z0-9\s]', '', text.lower())
 
 
-# ---------- NEW: URL SUSPICION SCORE (Cyber Signal) ----------
+# ---------- URL SUSPICION SCORE (Cyber Signal) ----------
 def url_suspicion_score(message):
     message_lower = message.lower()
 
@@ -42,14 +42,14 @@ def url_suspicion_score(message):
     score = 0
     for pattern in suspicious_patterns:
         if pattern in message_lower:
-            score += 20  # each suspicious URL signal adds risk
+            score += 20  # each suspicious URL adds risk
 
     return min(100, score)  # cap at 100
 
 
 @app.route("/")
 def home():
-    return "Hello Nidhi Backend"
+    return "Hello Nidhi Backend - LIVE!"
 
 
 @app.route("/test")
@@ -108,28 +108,27 @@ def analyze():
 
     message = data["message"]
 
-    # ---------- ML Probability (Improved Preprocessing) ----------
+    # ---------- ML Probability ----------
     cleaned_message = clean_text(message)
     message_vector = vectorizer.transform([cleaned_message])
-    ml_prob = model.predict_proba(message_vector)[0][1] * 100  # % scam probability
+    ml_prob = model.predict_proba(message_vector)[0][1] * 100  # %
 
     # ---------- Behavioral Threat Score ----------
     behavior_score, flagged = calculate_risk(message)
-    behavior_percent = min(100, behavior_score * 10)  # normalize to %
+    behavior_percent = min(100, behavior_score * 10)
 
-    # ---------- NEW: URL Suspicion Score ----------
+    # ---------- URL Cyber Signal ----------
     url_score = url_suspicion_score(message)
 
-    # ---------- 🔥 FINAL ENSEMBLE RISK FORMULA (UPGRADED) ----------
-    # Research-grade scoring
-    # 60% ML + 30% Behavioral + 10% Cyber URL Signals
+    # ---------- 🔥 FINAL ENSEMBLE RISK FORMULA ----------
+    # 60% ML + 30% Behavioral + 10% URL Risk
     final_risk_score = (
         (ml_prob * 0.6) +
         (behavior_percent * 0.3) +
         (url_score * 0.1)
     )
 
-    # ---------- Risk Level Logic (Refined) ----------
+    # ---------- Risk Level Logic ----------
     if final_risk_score < 30:
         risk_level = "Low"
     elif final_risk_score < 70:
@@ -137,11 +136,10 @@ def analyze():
     else:
         risk_level = "High"
 
-    # Scam Type Classification
+    # Scam Type
     scam_type = detect_scam_type(flagged)
 
-    # ---------- SMART CONFIDENCE (Judges Love This) ----------
-    # Confidence based on ML strength + ensemble stability
+    # ---------- Smart Confidence (Hackathon-grade) ----------
     confidence = round(
         min(98, (ml_prob * 0.7) + (final_risk_score * 0.3)),
         2
@@ -173,3 +171,4 @@ def internal_error(error):
 
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port=5000, debug=True)
+    

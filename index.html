@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voice Scam Guardian</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🛡 Voice Scam Guardian</h1>
+
+    <button id="micBtn">🎙 Start Recording</button>
+
+    <!-- TEXT AREA -->
+    <div id="textAreaContainer">
+
+        <textarea
+            id="speechText"
+            placeholder="Speech will appear here..."
+        ></textarea>
+
+        <div id="highlightedText" class="hidden"></div>
+
+    </div>
+
+    <button id="analyzeBtn">Analyze</button>
+
+    <!-- RESULTS -->
+    <div id="resultBox">
+
+        <div class="resultHeader">
+            <h2>Analysis Result</h2>
+
+            <div id="riskCircle">
+                <div id="riskInner">0%</div>
+            </div>
+        </div>
+
+        <p><strong>Risk:</strong> <span id="risk"></span></p>
+        <p><strong>Scam Type:</strong> <span id="type"></span></p>
+        <p><strong>Flagged Words:</strong> <span id="words"></span></p>
+        <p><strong>Explanation:</strong> <span id="explain"></span></p>
+
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
+
