@@ -80,22 +80,37 @@ def detect_scam_type(flagged_keywords):
 
     return "Suspicious Message"
 
-
 def generate_explanation(message, keywords, score, risk_level):
     if len(keywords) == 0:
-        return "✅ SAFE! Normal message hai. Koi scam words nahi mile. Fir bhi unknown links pe click MAT karo."
+        return (
+            "Yeh message mostly safe lag raha hai kyunki koi major scam keywords detect nahi hue. "
+            "Phir bhi unknown links par click karne ya personal details share karne se pehle verify zaroor karein."
+        )
     
     keywords_text = ", ".join(keywords)
     
     if risk_level == "Low":
-        return f"ℹ️ LOW RISK. Ye words mile: {keywords_text}. Normal lag rahe hain lekin double-check kar lo."
+        return (
+            f"Low risk detect hua hai. Message me yeh words mile: {keywords_text}. "
+            "Yeh necessarily scam nahi hote, lekin agar message unknown source se hai "
+            "toh thoda cautious rehna better hai."
+        )
     
     if risk_level == "Medium":
-        return f"⚠️ MEDIUM RISK! Ye words suspicious: {keywords_text}. Ye UPI/JOB/COURIER scams me common hai. Official number call karo pehle."
+        return (
+            f"Medium risk warning. Suspicious words detect hue: {keywords_text}. "
+            "Aise patterns UPI, job, courier ya verification scams me common hote hain. "
+            "Kisi bhi link ya request ko action lene se pehle official source se confirm karein."
+        )
     
     # High Risk - Detailed Scam Warning
     scam_details = detect_scam_type(keywords)
-    return f"🚨 DANGER SCAM! Words: {keywords_text}. Ye {scam_details} hai. PAISE/OTP/LINK MAT BHEJO. Police 1930 ya bank call karo ABHI!"
+    return (
+        f"High risk scam indicator detected. Risky words: {keywords_text}. "
+        f"Yeh pattern generally {scam_details} se related scams me use hota hai. "
+        "OTP, bank details ya payment bilkul share na karein aur sender ko verify karein."
+        "Is type ke messages urgency create karke users ko jaldi decision lene par force karte hain."
+    )
 
 
 
