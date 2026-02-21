@@ -82,21 +82,21 @@ def detect_scam_type(flagged_keywords):
 
 
 def generate_explanation(message, keywords, score, risk_level):
+    if len(keywords) == 0:
+        return "✅ SAFE! Normal message hai. Koi scam words nahi mile. Fir bhi unknown links pe click MAT karo."
+    
+    keywords_text = ", ".join(keywords)
+    
     if risk_level == "Low":
-        return (
-            "Yeh message safe lag raha hai. "
-            "Isme koi major scam indicators detect nahi hue. "
-            "Phir bhi unknown links ya personal details share karte waqt hamesha cautious rahein."
-        )
+        return f"ℹ️ LOW RISK. Ye words mile: {keywords_text}. Normal lag rahe hain lekin double-check kar lo."
+    
+    if risk_level == "Medium":
+        return f"⚠️ MEDIUM RISK! Ye words suspicious: {keywords_text}. Ye UPI/JOB/COURIER scams me common hai. Official number call karo pehle."
+    
+    # High Risk - Detailed Scam Warning
+    scam_details = detect_scam_type(keywords)
+    return f"🚨 DANGER SCAM! Words: {keywords_text}. Ye {scam_details} hai. PAISE/OTP/LINK MAT BHEJO. Police 1930 ya bank call karo ABHI!"
 
-    keywords_text = ", ".join(keywords) if keywords else "kuch suspicious patterns"
-
-    return (
-        f"Yeh message risky lag raha hai kyunki isme {keywords_text} jaise words detect hue hain. "
-        f"Yeh patterns scams mein commonly use hote hain (urgency, financial ya authority triggers). "
-        f"Kisi bhi unknown link par click na karein aur OTP ya personal details share na karein. "
-        f"Risk level: {risk_level}."
-    )
 
 
 @app.route("/analyze", methods=["POST"])
