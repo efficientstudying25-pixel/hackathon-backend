@@ -11,3 +11,4 @@ packaging==26.0
 Werkzeug==3.1.5
 joblib
 scikit-learn
+scikit-learn
