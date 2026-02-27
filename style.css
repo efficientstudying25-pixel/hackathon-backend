@@ -1,150 +1,328 @@
-body{
+/* Global Styles */
+body {
     font-family: Arial, sans-serif;
     background: linear-gradient(135deg,#010b21,#081e5a,#020111);
-    color:white;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-    margin:0;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 10px;
 }
 
-.container{
-    width:420px;
-    padding:25px;
-    border-radius:18px;
+/* Loader Styles */
+#loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 
-    /* Glass effect */
+    background: linear-gradient(135deg,#010b21,#081e5a,#020111); /* dark cyber bg */
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 9999;
+}
+
+#loader img {
+    width: 110px;
+    animation: glow 0.4s ease forwards;
+    filter: drop-shadow(0 0 6px rgba(59, 130, 246, 0.6))
+            drop-shadow(0 0 12px rgba(59, 130, 246, 0.4));
+    opacity: 1;
+}
+
+@keyframes glow {
+    from {
+        opacity: 0;
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.05);
+        opacity: 0.95;
+    }
+}
+
+/* Container Styles */
+.container {
+    width: 100%;
+    max-width: 420px;
+    padding: 25px;
+    border-radius: 18px;
     background: rgba(255,255,255,0.08);
     backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-
     border: 1px solid rgba(255,255,255,0.2);
-
-    /* Depth */
-    box-shadow:
-        0 8px 32px rgba(0,0,0,0.35);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.35);  
+    box-sizing: border-box;
+    position: relative;
 
 }
 
-.container:hover{
-    box-shadow:
-        0 12px 40px rgba(69, 71, 74, 0.4);
+.container:hover {
+    box-shadow: 0 12px 40px rgba(221, 208, 208, 0.047);
 }
 
-h1{
-    text-align:center;
-    margin-bottom:15px;
+h1 {
+    text-align: center;
+    font-size: 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-button{
-    width:100%;
-    padding:12px;
-    margin-top:10px;
-    border:none;
-    border-radius:8px;
-    background:#3b82f6;
-    color:white;
-    font-size:16px;
-    cursor:pointer;
+/* Mic Button */
+button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 8px;
+    background: #3b82f6;
+    color: white;
+    cursor: pointer;
+    font-size: 1rem;
 }
 
-textarea,#highlightedText{
-    width:100%;
-    height:120px;
-    margin-top:10px;
-    padding:10px;
-    border-radius:8px;
-    border:none;
-    box-sizing:border-box;
+/* Pulse animation for mic button */
+.listening {
+    animation: pulse 1s infinite;
+    background: #ef4444;
 }
 
-textarea{
-    background:white;
-    color:black;
+@keyframes pulse {
+    0% { transform: scale(1) } 
+    50% { transform: scale(1.05) }
+    100% { transform: scale(1) }
 }
 
-#highlightedText{
-    background:white;
-    color:black;
-    overflow-y:auto;
-    white-space:pre-wrap;
+/* Textarea and Highlighted Text */
+textarea, #highlightedText {
+    width: 100%;
+    height: 120px;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    box-sizing: border-box;
+    font-size: 1rem;
 }
 
-.flag{
-    background:#ef4444;
-    color:white;
-    padding:2px 4px;
-    border-radius:4px;
+#textAreaContainer {
+    position: relative;
 }
 
-.hidden{
-    display:none;
+textarea {
+    background: white;
+    color: rgb(1, 2, 9);
 }
 
-#resultBox{
-    margin-top:15px;
-    padding:15px;
-    border-radius:12px;
+#highlightedText {
+    background: white;
+    color: black;
+}
+
+.flag {
+    background: #ef4444;
+    color: white;
+    padding: 2px 4px;
+    border-radius: 4px;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Result Box */
+#resultBox {
+    margin-top: 15px;
+    padding: 15px;
+    border-radius: 12px;
     background: rgba(255,255,255,0.15);
-    backdrop-filter: blur(12px);
-    border:1px solid rgba(255,255,255,0.3);
 }
 
-/* HEADER ALIGNMENT */
-.resultHeader{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+.resultHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-/* GAUGE */
-.gauge-wrapper{
-  position:absolute;
-  top:15px;
-  right:15px;
+/* RISK CIRCLE */
+#riskCircle {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: conic-gradient(#22c55e 0deg, transparent 0deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-#riskCircle{
-    width:70px;
-    height:70px;
-    border-radius:50%;
-    background:conic-gradient(#22c55e 0deg, rgba(255,255,255,0.08) 0deg);
-    display:flex;
-    align-items:center;
-    justify-content:center;
+#riskInner {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: #081e5a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
 }
 
-#riskInner{
-    width:52px;
-    height:52px;
-    border-radius:50%;
-    background:#081e5a;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-size:12px;          /* smaller */
-    font-weight:bold;
-
-    gap:4px;                 /* space icon + number */
+/* Dropdown */
+#dropdownMenu {
+    position: absolute;
+    right: 0;
+    margin-top: 5px;
+    background: rgba(20,20,40,0.95);
+    border-radius: 8px;
+    width: 120px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    backdrop-filter: blur(10px);
+    z-index: 10;
+    transition: all 0.2s ease;
 }
 
-#riskInner{
-    letter-spacing:0.5px;
+.dropdown-item {
+    padding: 8px;
+    font-size: 14px;
+    cursor: pointer;
 }
 
-
-
-/* MIC PULSE */
-.listening{
-    animation:pulse 1s infinite;
-    background:#ef4444 !important;
+.dropdown-item:hover {
+    background: rgba(255,255,255,0.1);
 }
 
-@keyframes pulse{
-    0%{transform:scale(1)}
-    50%{transform:scale(1.05)}
-    100%{transform:scale(1)}
+.options-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10,15,40,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+.modal.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modalCard {
+    width: 90%;
+    max-width: 320px;
+    padding: 18px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.314);
+    backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.892);
+    transform: scale(0.9);
+    transition: transform 0.2s ease;
+}
+
+.modal.show .modalCard {
+    transform: scale(1);
+}
+
+.modalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+#closeModal {
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.modalContent p {
+    margin: 6px 0;
+    font-size: 14px;
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 15px;
+        border-radius: 14px;
+    }
+
+    h1 {
+        font-size: 1.4rem;
+    }
+
+    button {
+        padding: 10px;
+        font-size: 0.95rem;
+    }
+
+    textarea, #highlightedText {
+        height: 100px;
+        font-size: 0.9rem;
+    }
+
+    #riskCircle {
+        width: 60px;
+        height: 60px;
+    }
+
+    #riskInner {
+        width: 44px;
+        height: 44px;
+        font-size: 11px;
+    }
+
+    #dropdownMenu {
+        width: 100px;
+        font-size: 13px;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+    .container {
+        max-width: 360px;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    button {
+        font-size: 0.98rem;
+    }
+
+    textarea, #highlightedText {
+        height: 110px;
+    }
+}
+
+/* Logo Styles */
+h1.logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 1px;
+    margin: 0;
+    margin-left: 18px;
+}
+
+.logo img {
+    width: 72px;
+    height: 72px;
+    display: block;
 }

@@ -3,47 +3,71 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Voice Scam Guardian</title>
+<link rel="icon" href="logo.png" type="image/jpeg">
+<title>SCAMGUARD AI</title>
 <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+   <!-- LOADER -->
+<div id="loader">
+  <img src="logo.png" alt="logo">
+</div>
 
 <div class="container">
+     <!-- LOGO -->
+    <h1 class="logo"><img src="logo.png" alt="logo"> SCAMGUARD AI</h1>
 
-    <h1>🛡 Voice Scam Guardian</h1>
-
+     <!-- MIC BUTTON -->
     <button id="micBtn">🎙 Start Recording</button>
 
-    <!-- TEXT AREA -->
+     <!-- TEXT BOX -->
     <div id="textAreaContainer">
-
-        <textarea
-            id="speechText"
-            placeholder="Speech will appear here..."
-        ></textarea>
-
+        <textarea id="speechText" placeholder="Speech will appear here..."></textarea>
         <div id="highlightedText" class="hidden"></div>
-
     </div>
 
+    <!-- OPTIONS -->
+    <div id="optionsWrapper" class="options-wrapper hidden">
+        <div id="optionsBtn">...</div>
+
+        <div id="dropdownMenu" class="hidden">
+            <div class="dropdown-item" id="editOption">✏️ Edit</div>
+            <div class="dropdown-item" id="resetOption">🔄 Reset</div>
+        </div>
+    </div>
+
+    <!-- ANALYZE -->
     <button id="analyzeBtn">Analyze</button>
 
-    <!-- RESULTS -->
+     <!-- RESULT PANEL -->
     <div id="resultBox">
-
         <div class="resultHeader">
-            <h2>Analysis Result</h2>
-
+            <h2>Result</h2>
             <div id="riskCircle">
                 <div id="riskInner">0%</div>
             </div>
         </div>
+        <p><strong>● Risk:</strong> <span id="risk"></span></p>
+        <p><strong>● Scam Type:</strong> <span id="type"></span></p>
 
-        <p><strong>Risk:</strong> <span id="risk"></span></p>
-        <p><strong>Scam Type:</strong> <span id="type"></span></p>
-        <p><strong>Flagged Words:</strong> <span id="words"></span></p>
-        <p><strong>Explanation:</strong> <span id="explain"></span></p>
+        <!-- VIEW DETAILS -->
+        <button id="viewDetailsBtn" class="hidden">View Details ▾</button>
+
+        <!-- MODAL -->
+        <div id="detailsModal" class="modal hidden">
+            <div class="modalCard">
+                <div class="modalHeader">
+                    <h3>Details</h3>
+                    <span id="closeModal">❌</span>
+                </div>
+                <div class="modalContent">
+                    <p><strong>● Explanation:</strong> <span id="explain">--</span></p>
+                    <p><strong>● Confidence:</strong> <span id="confidence">--</span></p>
+                    <p><strong>● ML Score:</strong> <span id="ml-prob">--</span></p>
+                    <p><strong>● Flagged Words:</strong> <span id="words">--</span></p>
+                </div>
+            </div>
+        </div>
 
     </div>
 
@@ -51,5 +75,4 @@
 
 <script src="script.js"></script>
 </body>
-</html>
-
+</html
