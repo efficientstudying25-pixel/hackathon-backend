@@ -1,4 +1,4 @@
-# 🚨 ScamGuard AI
+# 🛡️ ScamGuard AI
 
 [![Python](https://img.shields.io/badge/Python-3.10-blue?logo=python&logoColor=white)](https://www.python.org/) 
 [![GitHub Repo](https://img.shields.io/badge/GitHub-Backend-black?logo=github&logoColor=white)](https://github.com/efficientstudying25-pixel/hackathon-backend) 
@@ -6,7 +6,7 @@
 [![Frontend](https://img.shields.io/badge/HTML%2FCSS%2FJS-blueviolet?logo=html5&logoColor=white)](#)
 
 
-**ScamGuard AI** detects potential scam content in text messages using a trained ML model.  
+**ScamGuard AI** detects potential scam content in voice input and text messages using a trained ML model.  
 It highlights risky keywords, provides risk scores, and explains why a message may be suspicious in hinglish.  
 
 ---
@@ -35,7 +35,7 @@ It highlights risky keywords, provides risk scores, and explains why a message m
 
 ## 🎥 Demo
 
-- **Watch the demo:** [Click here](YOUR_DEMO_VIDEO_LINK_HERE)  
+- **Watch the demo:** [Click here](https://drive.google.com/file/d/1Wvtwa83V1Q5bONQExH4UKijmdylNyC9c/view?usp=drivesdk)
 - **Frontend + Backend repo:** [GitHub Link](https://github.com/efficientstudying25-pixel/hackathon-backend)  
 
 ---
